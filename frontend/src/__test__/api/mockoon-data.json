@@ -1,0 +1,485 @@
+{
+  "uuid": "1501c43e-1459-4c9c-80c4-cfa08b4fdb66",
+  "lastMigration": 33,
+  "name": "accounting",
+  "endpointPrefix": "v1",
+  "latency": 0,
+  "port": 8080,
+  "hostname": "",
+  "folders": [
+    {
+      "uuid": "90ba745d-f6c2-4ba8-816f-3c79f899ea23",
+      "name": "session",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "5fc25e08-c717-48af-a83f-e2c714377e78"
+        },
+        {
+          "type": "route",
+          "uuid": "48e30150-4a1f-426e-8c5f-cfc03cb67769"
+        },
+        {
+          "type": "route",
+          "uuid": "468adc15-3e5d-46f8-9274-5f86344199ea"
+        }
+      ]
+    },
+    {
+      "uuid": "6b2b63e3-332e-4016-bc46-f15bda39f360",
+      "name": "finance",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "7638441a-0970-4cc8-a89d-59d1af346263"
+        },
+        {
+          "type": "route",
+          "uuid": "36b5dc7c-0d07-4edd-be19-213f7b09ef58"
+        },
+        {
+          "type": "route",
+          "uuid": "946e9c4a-28ae-4973-b319-48f69ba86f1e"
+        },
+        {
+          "type": "route",
+          "uuid": "41594e83-d0e1-4a73-91e9-6455471c2957"
+        },
+        {
+          "type": "route",
+          "uuid": "6ab12090-704b-43b1-9d9f-47467e28c5ff"
+        }
+      ]
+    },
+    {
+      "uuid": "ff6930be-9e95-4a6b-b1c1-26c3a094590d",
+      "name": "analytics",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "d94f430f-a1e2-4bfd-b764-37c144b9d249"
+        }
+      ]
+    },
+    {
+      "uuid": "6a1d7148-657e-4734-833e-ec3d057ad871",
+      "name": "settings",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "383ed25d-96e1-4256-afac-62aab29892c6"
+        },
+        {
+          "type": "route",
+          "uuid": "6d9dca60-147b-4149-8a8c-609b9bf93a4b"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "uuid": "5fc25e08-c717-48af-a83f-e2c714377e78",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "session/sign-up",
+      "responses": [
+        {
+          "uuid": "07237705-9d62-4d66-be43-e4c7867c1f4e",
+          "body": "{\n  \"user\": {\n    \"id\": \"{{ faker 'string.uuid' }}\",\n    \"name\": \"{{ faker 'person.fullName' }}\",\n    \"nickname\": \"{{ faker 'internet.username' }}\",\n    \"email\": \"{{ faker  'internet.email' }}\",\n    \"level\": \"BRONZE\",\n    \"role\": \"USER\",\n    \"avatar\": null\n  },\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmlja25hbWUiOiJqb2huX2RlZSJ9.I2tRIWGHmY7oEdNngjPsAnQu0r7qmd6qN0RtZmxgYvM\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "48e30150-4a1f-426e-8c5f-cfc03cb67769",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "session/sign-in",
+      "responses": [
+        {
+          "uuid": "3b5fefd4-05a1-4254-94e0-696b1b32d81f",
+          "body": "{\n  \"user\": {\n    \"id\": \"{{ faker 'string.uuid' }}\",\n    \"name\": \"{{ faker 'person.fullName' }}\",\n    \"nickname\": \"{{ faker 'internet.username' }}\",\n    \"email\": \"{{ faker  'internet.email' }}\",\n    \"level\": \"BRONZE\",\n    \"role\": \"USER\",\n    \"avatar\": null\n  },\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmlja25hbWUiOiJqb2huX2RlZSJ9.I2tRIWGHmY7oEdNngjPsAnQu0r7qmd6qN0RtZmxgYvM\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "7638441a-0970-4cc8-a89d-59d1af346263",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "finance/balance",
+      "responses": [
+        {
+          "uuid": "1313c7bc-310b-4d64-b247-ee5e531f176c",
+          "body": "{\n  \"id\": \"{{ faker 'string.uuid' }}\",\n  \"userId\": \"{{ faker 'string.uuid' }}\",\n  \"incomes\": [\n    {{# repeat 3 }}\n    {\n      \"id\": \"{{ faker 'string.uuid' }}\",\n      \"category\": \"{{ faker 'commerce.department' }}\",\n      \"value\": {{ faker 'number.float' min=100 max=5000 precision=0.01 }},\n      \"date\": \"{{ faker 'date.past' }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"expenses\": [\n    {{# repeat 4 }}\n    {\n      \"id\": \"{{ faker 'string.uuid' }}\",\n      \"category\": \"{{ faker 'commerce.department' }}\",\n      \"value\": {{ faker 'number.float' min=50 max=2500 precision=0.01 }},\n      \"date\": \"{{ faker 'date.recent' }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"wallets\": [\n    {{# repeat 2 }}\n    {\n      \"id\": \"{{ faker 'string.uuid' }}\",\n      \"category\": \"{{ faker 'finance.accountName' }}\",\n      \"deposited\": {{ faker 'number.float' min=100 max=1500 precision=0.01 }},\n      \"total\": {{ faker 'number.float' min=1500 max=5000 precision=0.01 }},\n      \"notes\": \"{{ faker 'lorem.sentence' }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"cash\": {{ faker 'number.float' min=1000 max=10000 precision=0.01 }},\n  \"investments\": {{ faker 'number.float' min=5000 max=20000 precision=0.01 }},\n  \"patrimony\": {{ faker 'number.float' min=15000 max=50000 precision=0.01 }},\n  \"debts\": {{ faker 'number.float' min=0 max=10000 precision=0.01 }},\n  \"createdAt\": \"{{ faker 'date.past' }}\",\n  \"updatedAt\": \"{{ faker 'date.recent' }}\"\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "36b5dc7c-0d07-4edd-be19-213f7b09ef58",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "finance/income",
+      "responses": [
+        {
+          "uuid": "5dd05ccb-28a0-4194-9d1a-3de6e65aac60",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "946e9c4a-28ae-4973-b319-48f69ba86f1e",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "finance/expense",
+      "responses": [
+        {
+          "uuid": "4cb82770-1fdb-4b8b-809b-090b4d085e22",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "41594e83-d0e1-4a73-91e9-6455471c2957",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "finance/wallet/deposit/:category",
+      "responses": [
+        {
+          "uuid": "09c687d7-b472-4898-88be-b41e14aa9f30",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6ab12090-704b-43b1-9d9f-47467e28c5ff",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "finance/wallet/withdraw:category",
+      "responses": [
+        {
+          "uuid": "385fd21f-eb5b-4043-baf0-0b245eb19dc8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "468adc15-3e5d-46f8-9274-5f86344199ea",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "session/current",
+      "responses": [
+        {
+          "uuid": "d234ddd6-d552-46e8-9478-75d6301e322d",
+          "body": "{\n  \"id\": \"{{ faker 'string.uuid' }}\",\n  \"name\": \"{{ faker 'person.fullName' }}\",\n  \"nickname\": \"{{ faker 'internet.username' }}\",\n  \"email\": \"{{ faker  'internet.email' }}\",\n  \"level\": \"BRONZE\",\n  \"role\": \"USER\",\n  \"avatar\": \"https://i.pravatar.cc/101\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "d94f430f-a1e2-4bfd-b764-37c144b9d249",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "analytics",
+      "responses": [
+        {
+          "uuid": "bea0c3e4-2d58-46ae-bb0f-f759b78bdc78",
+          "body": "{\n  \"id\": \"{{ faker 'string.uuid' }}\",\n  \"userId\": \"{{ faker 'string.uuid' }}\",\n  \"patrimony\": [\n    {{# repeat 3 }}\n    {\n      \"value\": {{ faker 'number.float' min=10000 max=40000 precision=0.01 }},\n      \"month\": \"{{ faker 'date.month' }}-{{ faker 'number.int' min=2023 max=2025 }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"incomes\": [\n    {{# repeat 4 }}\n    {\n      \"category\": \"{{ faker 'commerce.department' }}\",\n      \"value\": {{ faker 'number.float' min=100 max=10000 precision=0.01 }},\n      \"month\": \"2025-{{ faker 'number.int' min=1 max=12 }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"expenses\": [\n    {{# repeat 5 }}\n    {\n      \"category\": \"{{ faker 'commerce.department' }}\",\n      \"value\": {{ faker 'number.float' min=100 max=5000 precision=0.01 }},\n      \"month\": \"2025-{{ faker 'number.int' min=1 max=12 }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"wallets\": [\n    {{# repeat 5 }}\n    {\n      \"category\": \"{{ faker 'finance.accountName' }}\",\n      \"total\": {{ faker 'number.float' min=500 max=5000 precision=0.01 }},\n      \"month\": \"2025-{{ faker 'number.int' min=1 max=12 }}\"\n    }{{# unless @last }},{{/unless}}\n    {{/ repeat }}\n  ],\n  \"createdAt\": \"{{ faker 'date.past' }}\",\n  \"updatedAt\": \"{{ faker 'date.recent' }}\"\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "383ed25d-96e1-4256-afac-62aab29892c6",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "settings/avatar",
+      "responses": [
+        {
+          "uuid": "d7e3b0e0-790f-409b-85c7-edeba52b1c0a",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6d9dca60-147b-4149-8a8c-609b9bf93a4b",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "settings/password",
+      "responses": [
+        {
+          "uuid": "33463853-a22d-4d75-984d-3b0369727be0",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "folder",
+      "uuid": "90ba745d-f6c2-4ba8-816f-3c79f899ea23"
+    },
+    {
+      "type": "folder",
+      "uuid": "6b2b63e3-332e-4016-bc46-f15bda39f360"
+    },
+    {
+      "type": "folder",
+      "uuid": "ff6930be-9e95-4a6b-b1c1-26c3a094590d"
+    },
+    {
+      "type": "folder",
+      "uuid": "6a1d7148-657e-4734-833e-ec3d057ad871"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

@@ -1,0 +1,68 @@
+generator client_mongo {
+  provider = "prisma-client-js"
+  output   = "./generated/mongo"
+}
+
+datasource mongo {
+  provider = "mongodb"
+  url      = env("MONGODB_URL")
+}
+
+model Balance {
+  id          String          @id @default(uuid()) @map("_id")
+  userId      String          @unique @map("user_id")
+  incomes     IncomeExpense[]
+  expenses    IncomeExpense[]
+  wallets     Wallet[]
+  cash        Float           @default(0)
+  investments Float           @default(0)
+  patrimony   Float           @default(0)
+  debts       Float           @default(0)
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+
+  @@map("balances")
+}
+
+model Analytics {
+  id        String                        @id @default(uuid()) @map("_id")
+  userId    String                        @unique @map("user_id")
+  patrimony PatrimonyMonthly[]
+  incomes   IncomeExpenseHistory[]
+  expenses  IncomeExpenseHistory[]
+  wallets   WalletMonthly[]
+  createdAt DateTime                      @default(now()) @map("created_at")
+  updatedAt DateTime                      @updatedAt @map("updated_at")
+
+  @@map("analytics")
+}
+
+type Wallet {
+  category  String
+  deposited Float
+  date      DateTime @default(now())
+  notes     String?
+}
+
+type IncomeExpense {
+  category String
+  value    Float
+  date     DateTime @default(now())
+}
+
+type IncomeExpenseHistory {
+  category String
+  value    Float
+  month    String
+}
+
+type PatrimonyMonthly {
+  value Float
+  month String
+}
+
+type WalletMonthly {
+  category String
+  total    Float
+  month    String
+}

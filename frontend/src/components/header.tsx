@@ -1,0 +1,89 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import { cookies } from 'next/headers'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import LogoutButton from './log-out-button'
+import { Bell } from 'lucide-react'
+import { ThemeToggle } from './theme-provider'
+
+export default async function Header() {
+  const token = (await cookies()).get('access_token')
+
+  return (
+    <header className="flex items-center justify-between p-4 bg-slate-500 dark:bg-slate-800 shadow-md">
+      <div className="flex items-center gap-5">
+        <Link href="/" className="text-2xl font-extrabold text-white">
+          Accounting
+        </Link>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <div className="w-px h-4" />
+        <ThemeToggle />
+
+        {token ? (
+          <>
+            <Bell className="w-4.5 cursor-pointer" />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="flex items-center gap-2 hover:underline cursor-pointer">
+                  <span className="text-md">Account</span>
+                  <Image
+                    src="https://i.pravatar.cc/101"
+                    className="h-7 w-7 rounded-full"
+                    width={24}
+                    height={24}
+                    alt="avatar"
+                  />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="start">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <Link href="/settings">Profile Settings</Link>
+                    <DropdownMenuShortcut>⇧⌘S</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/dashboard">Dashboard</Link>
+                    <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <LogoutButton />
+                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : (
+          <div className="flex gap-4">
+            <Link
+              href="/sign-up"
+              className="bg-gray-800 text-white cursor-pointer p-2 rounded-md"
+            >
+              Sign-up
+            </Link>
+            <Link
+              href="/sign-in"
+              className="bg-blue-800 text-white cursor-pointer p-2 rounded-md"
+            >
+              Sign-in
+            </Link>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}

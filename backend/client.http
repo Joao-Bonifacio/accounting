@@ -1,0 +1,67 @@
+@baseUrl = http://localhost:8080/v1
+@access_token = {{signin.response.body.access_token}}
+@nickname = {{signin.response.body.nickname}}
+@wallet_category = {{get_balance.response.body.wallets[0].category}}
+
+# @name signup
+POST {{baseUrl}}/session/sign-up
+Content-Type: application/json
+
+{
+  "name": "John Dee",
+  "email": "test@test.com",
+  "nickname": "john_dee",
+  "password": "@Passw0rd"
+}
+###
+# @name signin
+POST {{baseUrl}}/session/sign-in
+Content-Type: application/json
+
+{
+  "nickname": "john_dee",
+  "password": "@Passw0rd"
+}
+###
+# @name get_balance
+GET {{baseUrl}}/finance/balance
+Authorization: Bearer {{access_token}}
+###
+# @name add_income
+PATCH {{baseUrl}}/finance/income
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "category": "Trade",
+  "value": 2305.5,
+}
+###
+# @name add_expense
+PATCH {{baseUrl}}/finance/expense
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "category": "Food",
+  "value": 23.5,
+}
+###
+# @name deposit_wallet
+PATCH {{baseUrl}}/finance/wallet/deposit/{{wallet_category}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "value": 30
+}
+###
+# @name withdraw_wallet
+PATCH {{baseUrl}}/finance/wallet/withdraw/{{wallet_category}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "value": 15
+}
+###

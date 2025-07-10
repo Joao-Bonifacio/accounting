@@ -1,0 +1,81 @@
+/* eslint-disable camelcase */
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Post,
+  UsePipes,
+} from '@nestjs/common'
+import {
+  type UserFetched,
+  UserStorage,
+} from '@/infra/db/prisma/transactions/user.storage'
+import { Public } from '@/infra/auth/public'
+import type { SignupBody, LoginBody } from './user.dto'
+import { zSigninDTO, zSignupDTO } from './user.dto'
+import { ZodValidatorPipe } from '@/infra/pipes/zod-validation.pipe'
+import { CurrentUser } from '@/infra/auth/current-user-decorator'
+import { FinanceStorage } from '@/infra/db/prisma/transactions/finace.storage'
+import { AnalyticsStorage } from '@/infra/db/prisma/transactions/analytics.storage'
+import type { UserPayload } from '@/infra/auth/jwt.strategy'
+
+@Controller('session')
+export class SessionController {
+  constructor(
+    private user: UserStorage,
+    private finance: FinanceStorage,
+    private analytics: AnalyticsStorage
+  ) {}
+
+  @Get('current')
+  async getUser(@CurrentUser() user: { sub: string }) {
+    return this.user.findById(user.sub)
+  }
+
+  @Public()
+  @UsePipes(new ZodValidatorPipe(zSignupDTO))
+  @Post('sign-up')
+  @HttpCode(201)
+  async create(@Body() body: SignupBody) {
+    const signup = await this.user.create(body)
+    if (typeof signup === 'object' && 'error' in signup && signup.error) {
+      throw new HttpException(signup, HttpStatus.BAD_REQUEST)
+    }
+
+    const { access_token, user } = signup as UserFetched
+    await this.finance.create(user.id)
+    await this.analytics.create(user.id)
+    return { access_token, user: { ...user, password: undefined } }
+  }
+
+  @Public()
+  @UsePipes(new ZodValidatorPipe(zSigninDTO))
+  @Post('sign-in')
+  @HttpCode(201)
+  async match(@Body() body: LoginBody) {
+    const signin = await this.user.find(body)
+    if (typeof signin === 'object' && 'error' in signin && signin.error) {
+      throw new HttpException(signin, HttpStatus.BAD_REQUEST)
+    }
+
+    const { access_token, user } = signin as UserFetched
+    return { access_token, user: { ...user, password: undefined } }
+  }
+
+  @Get('current')
+  async getCurrentUser(@CurrentUser() user: { sub: string }) {
+    return await this.user.findById(user.sub)
+  }
+
+  @Delete()
+  @HttpCode(204)
+  async removeUser(@CurrentUser() { sub }: UserPayload) {
+    await this.finance.delete(sub)
+    await this.analytics.delete(sub)
+    return this.user.delete(sub)
+  }
+}
