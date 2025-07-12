@@ -67,15 +67,12 @@ export const addExpense = async (data: FormData): Promise<void> => {
   revalidateTag('balance')
 }
 
-export const depositWallet = async (
-  data: FormData,
-  category: string,
-): Promise<void> => {
+export const depositWallet = async (data: FormData): Promise<void> => {
   const token = (await cookies()).get('access_token')
   const validation = validate(data, movmentWalletSchema)
   if (!token || !validation.success) throw new Error('Unauthorized')
 
-  const response = await api(`/finance/wallet/deposit/${category}`, {
+  const response = await api('/finance/wallet/deposit', {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -91,15 +88,12 @@ export const depositWallet = async (
   revalidateTag('balance')
 }
 
-export const withdrawWallet = async (
-  data: FormData,
-  category: string,
-): Promise<void> => {
+export const withdrawWallet = async (data: FormData): Promise<void> => {
   const token = (await cookies()).get('access_token')
   const validation = validate(data, movmentWalletSchema)
   if (!token || !validation.success) throw new Error('Unauthorized')
 
-  const response = await api(`/finance/wallet/withdraw/${category}`, {
+  const response = await api('/finance/wallet/withdraw', {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,

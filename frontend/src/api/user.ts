@@ -130,7 +130,7 @@ export const updatePassword = async (data: FormData): Promise<unknown> => {
   if (!token || !validation.success) throw new Error('Unauthorized')
 
   const response = await api('/settings/password', {
-    method: 'POST',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

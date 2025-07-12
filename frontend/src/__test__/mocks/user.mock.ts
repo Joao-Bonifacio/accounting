@@ -16,6 +16,6 @@ export const mockUser = {
   name: 'John Doe',
   email: 'john@example.com',
   nickname: 'john_doe',
-  level: UserLevel.BRONZE,
-  role: UserRole.USER,
+  level: 'GOLD',
+  role: 'USER',
 }

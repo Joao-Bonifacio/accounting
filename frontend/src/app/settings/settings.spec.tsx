@@ -40,7 +40,7 @@ describe('SettingsPage', () => {
     mockGetCurrentUser.mockResolvedValueOnce({
       nickname: 'john_doe',
       avatar: '/avatar.jpg',
-      level: 'GOLD',
+      level: 'PLATINUM',
       id: 'uuid-01',
       name: 'John Dee',
       email: 'test@test.com',

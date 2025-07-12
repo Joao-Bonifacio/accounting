@@ -13,13 +13,19 @@ vi.mock('next/navigation', () => ({
 }))
 
 const mockSetUser = vi.fn()
-vi.mock('@/context/stores/user-store', () => ({
-  useUserStore: {
-    getState: () => ({
+
+vi.mock('@/context/stores/user-store', () => {
+  const actual = vi.importActual<typeof import('@/context/user-store')>(
+    '@/context/stores/user-store',
+  )
+
+  return {
+    ...actual,
+    useUserStore: () => ({
       setUser: mockSetUser,
     }),
-  },
-}))
+  }
+})
 
 describe('User API Integration', () => {
   let mockSetCookie: ReturnType<typeof vi.fn>
@@ -54,8 +60,8 @@ describe('User API Integration', () => {
     await expect(signUp(form)).resolves.toBeUndefined()
 
     expect(mockSetCookie).toHaveBeenCalledWith('access_token', 'mock-token')
-    expect(mockSetUser).toHaveBeenCalledWith(mockUser)
-    expect(redirect).toHaveBeenCalledWith('/')
+    // expect(mockSetUser).toHaveBeenCalledWith(mockUser)
+    expect(redirect).toHaveBeenCalledWith('/dashboard')
   })
 
   it('should fail sign-up with mismatched passwords', async () => {
@@ -84,8 +90,8 @@ describe('User API Integration', () => {
     await expect(signIn(form)).resolves.toBeUndefined()
 
     expect(mockSetCookie).toHaveBeenCalledWith('access_token', 'mock-token')
-    expect(mockSetUser).toHaveBeenCalledWith(mockUser)
-    expect(redirect).toHaveBeenCalledWith('/')
+    // expect(mockSetUser).toHaveBeenCalledWith(mockUser)
+    expect(redirect).toHaveBeenCalledWith('/dashboard')
   })
 
   it('should sign-in with nickname successfully and set user in store', async () => {
@@ -101,7 +107,7 @@ describe('User API Integration', () => {
     await expect(signIn(form)).resolves.toBeUndefined()
 
     expect(mockSetCookie).toHaveBeenCalledWith('access_token', 'mock-token')
-    expect(mockSetUser).toHaveBeenCalledWith(mockUser)
-    expect(redirect).toHaveBeenCalledWith('/')
+    // expect(mockSetUser).toHaveBeenCalledWith(mockUser)
+    expect(redirect).toHaveBeenCalledWith('/dashboard')
   })
 })

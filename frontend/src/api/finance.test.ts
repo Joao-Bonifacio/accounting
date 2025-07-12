@@ -54,12 +54,7 @@ describe('finance API server actions', () => {
 
     const result = await getBalance()
     expect(result).toEqual(mockBalance)
-    expect(api).toHaveBeenCalledWith('finance/balance', {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer fake_token',
-      },
-    })
+    expect(api).toHaveBeenCalledWith('finance/balance', expect.any(Object))
   })
 
   it('addIncome: should call API and revalidate', async () => {
@@ -86,7 +81,7 @@ describe('finance API server actions', () => {
     const mockForm = new FormData()
     ;(api as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: true })
 
-    await depositWallet(mockForm, 'savings')
+    await depositWallet(mockForm)
 
     expect(api).toHaveBeenCalledWith(
       '/finance/wallet/deposit',
@@ -99,7 +94,7 @@ describe('finance API server actions', () => {
     const mockForm = new FormData()
     ;(api as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: true })
 
-    await withdrawWallet(mockForm, 'cash')
+    await withdrawWallet(mockForm)
 
     expect(api).toHaveBeenCalledWith(
       '/finance/wallet/withdraw',

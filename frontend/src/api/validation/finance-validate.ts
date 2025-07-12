@@ -29,6 +29,7 @@ export const balanceSchema = z.object({
 
 export const movmentWalletSchema = z.object({
   value: z.number(),
+  category: z.string(),
 })
 
 export const addIncomeExpenseSchema = z.object({
