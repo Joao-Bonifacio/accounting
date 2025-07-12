@@ -51,7 +51,7 @@ export class FinanceController {
   @HttpCode(204)
   async depositWallet(
     @CurrentUser() { sub }: UserPayload,
-    @Body() body: { value: number, category: string, notes?: string },
+    @Body() body: { value: number; category: string; notes?: string },
   ) {
     return this.finance.depositWallet(sub, body)
   }

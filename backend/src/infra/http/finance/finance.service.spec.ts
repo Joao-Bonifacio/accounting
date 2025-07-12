@@ -5,7 +5,12 @@ import { FinanceStorage } from '@/infra/db/prisma/transactions/finace.storage'
 const userId = 'user-123'
 const income = { value: 100, category: 'salary', month: '2025-07' }
 const expense = { value: 50, category: 'rent', month: '2025-07' }
-const deposit = { category: 'bank', value: 200, date: new Date(), notes: 'note' }
+const deposit = {
+  category: 'bank',
+  value: 200,
+  date: new Date(),
+  notes: 'note',
+}
 
 const mockStorage = {
   getBalance: vi.fn(),

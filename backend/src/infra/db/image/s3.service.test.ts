@@ -9,7 +9,7 @@ describe('S3Storage Integration', () => {
     const configService = {
       get: (key: string) => {
         const mockEnv = {
-          S3_BUCKET_NAME: 'ecommerce',
+          S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
           S3_ACCESS_KEY: 'minioadmin',
           S3_SECRET_KEY: 'minioadmin123',
           S3_ENDPOINT: 'http://localhost:9000',

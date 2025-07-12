@@ -1,13 +1,15 @@
+import { describe, it, beforeAll, afterAll } from 'vitest'
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication, ValidationPipe } from '@nestjs/common'
-import * as request from 'supertest'
+import request from 'supertest'
 import { AppModule } from '@/infra/app.module'
 import { JwtService } from '@nestjs/jwt'
 
 describe('AnalyticsController (e2e)', () => {
   let app: INestApplication
   let accessToken: string
-  const userId = 'user-123'
+  const sub = 'user-123'
+  const nickname = 'test_user'
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -19,7 +21,7 @@ describe('AnalyticsController (e2e)', () => {
     await app.init()
 
     const jwtService = moduleFixture.get(JwtService)
-    accessToken = jwtService.sign({ sub: userId })
+    accessToken = jwtService.sign({ sub, nickname })
   })
 
   it('/analytics (GET) returns 200 and analytics', async () => {

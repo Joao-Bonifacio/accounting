@@ -1,6 +1,7 @@
+import { describe, it, beforeAll, afterAll } from 'vitest'
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication, ValidationPipe } from '@nestjs/common'
-import * as request from 'supertest'
+import request from 'supertest'
 import { JwtService } from '@nestjs/jwt'
 import { AppModule } from '@/infra/app.module'
 
@@ -8,7 +9,8 @@ describe('FinanceController (e2e)', () => {
   let app: INestApplication
   let jwtService: JwtService
   let accessToken: string
-  const userId = 'user-e2e-id'
+  const sub = 'user-e2e-id'
+  const nickname = 'test_user2'
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -20,7 +22,7 @@ describe('FinanceController (e2e)', () => {
     await app.init()
 
     jwtService = moduleFixture.get(JwtService)
-    accessToken = jwtService.sign({ sub: userId })
+    accessToken = jwtService.sign({ sub, nickname })
   })
 
   it('/finance/balance (GET) should return user balance', async () => {
@@ -48,19 +50,19 @@ describe('FinanceController (e2e)', () => {
       .expect(204)
   })
 
-  it('/finance/wallet/deposit/:category (PATCH)', async () => {
+  it('/finance/wallet/deposit (PATCH)', async () => {
     await request(app.getHttpServer())
-      .patch('/finance/wallet/deposit/savings')
+      .patch('/finance/wallet/deposit')
       .set('Authorization', `Bearer ${accessToken}`)
-      .send({ value: 200 })
+      .send({ category: 'stoks', value: 200 })
       .expect(204)
   })
 
-  it('/finance/wallet/withdraw/:category (PATCH)', async () => {
+  it('/finance/wallet/withdraw (PATCH)', async () => {
     await request(app.getHttpServer())
-      .patch('/finance/wallet/withdraw/savings')
+      .patch('/finance/wallet/withdraw')
       .set('Authorization', `Bearer ${accessToken}`)
-      .send({ value: 100 })
+      .send({ category: 'stoks', value: 100 })
       .expect(204)
   })
 

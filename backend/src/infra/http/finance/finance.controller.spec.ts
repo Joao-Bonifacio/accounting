@@ -44,25 +44,31 @@ describe('FinanceController', () => {
     const income = { value: 100, category: 'salary', month: '2025-07' }
     await controller.addIncome(userPayload, income)
 
-    expect(financeService.addIncome).toHaveBeenCalledWith(userPayload.sub, income)
+    expect(financeService.addIncome).toHaveBeenCalledWith(
+      userPayload.sub,
+      income,
+    )
   })
 
   it('should call addExpense with correct payload', async () => {
     const expense = { value: 50, category: 'rent', month: '2025-07' }
     await controller.addExpense(userPayload, expense)
 
-    expect(financeService.addExpense).toHaveBeenCalledWith(userPayload.sub, expense)
+    expect(financeService.addExpense).toHaveBeenCalledWith(
+      userPayload.sub,
+      expense,
+    )
   })
 
   it('should call depositWallet', async () => {
     const body = { value: 300, category: 'savings', notes: 'monthly deposit' }
     await controller.depositWallet(userPayload, body)
 
-    expect(financeService.depositWallet).toHaveBeenCalledWith(
-      userPayload.sub,
-      'savings',
-      300
-    )
+    expect(financeService.depositWallet).toHaveBeenCalledWith(userPayload.sub, {
+      category: 'savings',
+      notes: 'monthly deposit',
+      value: 300,
+    })
   })
 
   it('should call withdrawWallet with correct params', async () => {
@@ -72,7 +78,7 @@ describe('FinanceController', () => {
     expect(financeService.withdrawWallet).toHaveBeenCalledWith(
       userPayload.sub,
       'bank',
-      200
+      200,
     )
   })
 })

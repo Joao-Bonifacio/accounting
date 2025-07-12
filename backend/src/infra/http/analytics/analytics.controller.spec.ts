@@ -15,8 +15,8 @@ describe('AnalyticsController', () => {
     incomes: [],
     expenses: [],
     wallets: [],
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: '2024-07-01T00:00:00.000Z',
+    updatedAt: '2024-07-01T00:00:00.000Z',
   }
 
   const userPayload = { sub: 'user-123', nickname: 'john_dee' }
@@ -73,8 +73,8 @@ describe('AnalyticsController', () => {
     mockCacheStorage.get.mockResolvedValue(null)
     mockAnalyticsStorage.syncAnalytics.mockResolvedValue(null)
 
-    await expect(() =>
-      controller.getAnalytics(userPayload),
-    ).rejects.toThrow('Analytics not found')
+    await expect(() => controller.getAnalytics(userPayload)).rejects.toThrow(
+      'Analytics not found',
+    )
   })
 })

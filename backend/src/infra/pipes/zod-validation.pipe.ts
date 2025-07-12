@@ -7,13 +7,15 @@ export class ZodValidatorPipe implements PipeTransform {
 
   transform(value: unknown) {
     try {
-      return this.schema.parse(value)
+      // const validation = this.schema.safeParse(value)
+      const validation = this.schema.parse(value)
+      return validation
     } catch (error) {
       if (error instanceof ZodError) {
         throw new BadRequestException({
           message: 'Validation failed',
-          statudCode: 400,
-          error: fromZodError(error),
+          statusCode: 400,
+          error: fromZodError(error as any),
         })
       }
       throw new BadRequestException('Data validation failed')

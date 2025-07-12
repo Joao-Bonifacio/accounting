@@ -21,6 +21,12 @@ import { AnalyticsStorage } from './prisma/transactions/analytics.storage'
     S3Storage,
     CacheStorage,
   ],
-  exports: [UserStorage, FinanceStorage, AnalyticsStorage, S3Storage, CacheStorage],
+  exports: [
+    UserStorage,
+    FinanceStorage,
+    AnalyticsStorage,
+    S3Storage,
+    CacheStorage,
+  ],
 })
 export class DatabaseModule {}

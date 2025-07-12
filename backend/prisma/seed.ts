@@ -10,11 +10,11 @@ async function runSeedScript(scriptName: string) {
 }
 
 export async function seed() {
-  console.log('-----------------> Products <-----------------')
+  console.log('------------------> Finance <------------------')
   await runSeedScript('mongo.seed.ts')
   console.log('-------------------> Users <-------------------')
   await runSeedScript('postgres.seed.ts')
-  console.log('----------------------------------------------')
+  console.log('-----------------------------------------------')
   console.log('OK: All seeds finished correctly')
 }
 

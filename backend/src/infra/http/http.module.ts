@@ -9,7 +9,12 @@ import { SettingsController } from './settings/settings.controller'
 
 @Module({
   imports: [EnvModule, DatabaseModule],
-  controllers: [SessionController, SettingsController, FinanceController, AnalyticsController],
+  controllers: [
+    SessionController,
+    SettingsController,
+    FinanceController,
+    AnalyticsController,
+  ],
   providers: [FinanceService],
 })
 export class HttpModule {}

@@ -28,7 +28,7 @@ export class SessionController {
   constructor(
     private user: UserStorage,
     private finance: FinanceStorage,
-    private analytics: AnalyticsStorage
+    private analytics: AnalyticsStorage,
   ) {}
 
   @Get('current')

@@ -74,7 +74,7 @@ describe('UserStorage Integration Tests', () => {
         createDummyUser({ nickname: 'another_user' }),
       )
 
-      expect(result).toEqual({ error: true, badEmail: true })
+      expect(result).toEqual({ error: 'Invalid Credentials' })
       const count = await prisma.user.count()
       expect(count).toBe(1)
     })
@@ -87,7 +87,7 @@ describe('UserStorage Integration Tests', () => {
         createDummyUser({ email: 'another@email.com' }),
       )
 
-      expect(result).toEqual({ error: true, badNickname: true })
+      expect(result).toEqual({ error: 'Invalid Credentials' })
       const count = await prisma.user.count()
       expect(count).toBe(1)
     })
@@ -116,7 +116,7 @@ describe('UserStorage Integration Tests', () => {
         password: 'password',
         nickname: undefined,
       })
-      expect(result).toEqual({ error: true, badUser: true })
+      expect(result).toEqual({ error: 'bad_user' })
     })
 
     it('should return an error for incorrect password', async () => {
@@ -128,7 +128,7 @@ describe('UserStorage Integration Tests', () => {
         password: 'wrongpassword',
         nickname: undefined,
       })
-      expect(result).toEqual({ error: true, badUser: true })
+      expect(result).toEqual({ error: 'bad_user' })
     })
   })
 
@@ -152,7 +152,7 @@ describe('UserStorage Integration Tests', () => {
         password: 'password123',
         nickname: undefined,
       })
-      expect(oldLoginResult).toEqual({ error: true, badUser: true })
+      expect(oldLoginResult).toEqual({ error: 'bad_user' })
     })
   })
 })

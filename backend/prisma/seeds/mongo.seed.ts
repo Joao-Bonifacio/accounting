@@ -6,9 +6,9 @@ export async function seed() {
   console.log('Cleaning balances...')
   await prisma.balance.deleteMany()
 
-  const productsCount = 5
+  const balanceCount = 2
 
-  for (let i = 0; i < productsCount; i++) {
+  for (let i = 0; i < balanceCount; i++) {
 
     const balance = await prisma.balance.create({
       data: {
@@ -25,7 +25,7 @@ export async function seed() {
         }],
         wallets: [{
           category: faker.helpers.arrayElement(['Crypto', 'Stocks']).toLowerCase(),
-          total: faker.number.float({ min: 100, max: 20000, fractionDigits: 2 })
+          deposited: faker.number.float({ min: 100, max: 10000, fractionDigits: 2 }),
         }],
       },
     })
