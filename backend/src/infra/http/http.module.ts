@@ -6,6 +6,7 @@ import { FinanceController } from './finance/finance.controller'
 import { FinanceService } from './finance/finance.service'
 import { AnalyticsController } from './analytics/analytics.controller'
 import { SettingsController } from './settings/settings.controller'
+import { BlockchainController } from './blockchain/blockchain.controller'
 
 @Module({
   imports: [EnvModule, DatabaseModule],
@@ -14,6 +15,7 @@ import { SettingsController } from './settings/settings.controller'
     SettingsController,
     FinanceController,
     AnalyticsController,
+    BlockchainController,
   ],
   providers: [FinanceService],
 })

@@ -9,9 +9,9 @@ import {
 import { CacheStorage } from './cache/cache.service'
 import { FinanceStorage } from './prisma/transactions/finace.storage'
 import { AnalyticsStorage } from './prisma/transactions/analytics.storage'
-
+import { BlockchainModule } from './contracts/blockchain.module'
 @Module({
-  imports: [EnvModule],
+  imports: [EnvModule, BlockchainModule],
   providers: [
     PrismaServicePostgres,
     PrismaServiceMongo,
@@ -27,6 +27,7 @@ import { AnalyticsStorage } from './prisma/transactions/analytics.storage'
     AnalyticsStorage,
     S3Storage,
     CacheStorage,
+    BlockchainModule,
   ],
 })
 export class DatabaseModule {}

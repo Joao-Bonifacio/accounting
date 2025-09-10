@@ -91,6 +91,7 @@ stories/
 # Infra
 addons/
 .config/
+/bloc
 
 # Misc
 *.pem
